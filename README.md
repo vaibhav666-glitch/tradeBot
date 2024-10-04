@@ -46,15 +46,15 @@ The bot tracks the balance, number of shares, and logs each trade.
 
 ## How to Run The Application
 **Clone the repository:**
-- 1. git clone https://github.com/vaibhav666-glitch/tradeBot.git
-- 2. cd tradeBot
+- git clone https://github.com/vaibhav666-glitch/tradeBot.git
+- cd tradeBot
 
-**Install dependencies:**
+## Install dependencies:
 - npm i
-**Start the server**
+## Start the server
 - node index.js
 
 ### Client side usage
-- 1. **Open** client.html
-- 2. press the **Go-Live** button (if you're using Visual Studio Code Live Server extension) to launch the client-side interface.
+- **Open** client.html
+- press the **Go-Live** button (if you're using Visual Studio Code Live Server extension) to launch the client-side interface.
 
