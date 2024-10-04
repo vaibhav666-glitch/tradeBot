@@ -58,3 +58,6 @@ The bot tracks the balance, number of shares, and logs each trade.
 - **Open** client.html
 - press the **Go-Live** button (if you're using Visual Studio Code Live Server extension) to launch the client-side interface.
 
+## YouTube Link
+- https://youtu.be/TxwK9wxsGP8
+
