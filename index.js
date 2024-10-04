@@ -101,7 +101,7 @@ function generateSummaryReport() {
   console.log(`Final Share Price: $${mockStockPrice}`);
   console.log("\nTrade History:");
   trades.forEach((trade, index) => {
-    console.log(`${index + 1}. ${trade.type}: ${trade.shares} shares at $${trade.price} (${trade.type === 'BUY' ? 'Cost' : 'Revenue'}: $${trade.type === 'BUY' ? trade.cost.toFixed(2) : trade.revenue.toFixed(2)}) ${trade.type=='SELL' && trade.revenue-trade.cost<0?'Loss':'Profit'}`);
+    console.log(`${index + 1}. ${trade.type}: ${trade.shares} shares at $${trade.price} (${trade.type === 'BUY' ? 'Cost' : 'Revenue'}: $${trade.type === 'BUY' ? trade.cost.toFixed(2) : trade.revenue.toFixed(2)}) `);
   });
   console.log("\n--- End of Report ---");
 
