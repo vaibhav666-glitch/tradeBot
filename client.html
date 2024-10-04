@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Bot</title>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Trading Bot</h1>
+    <div id="stock-info">
+        <p>Current Price: $<span id="price">0</span></p>
+        <p>Balance: $<span id="balance">0</span></p>
+        <p>Shares Owned: <span id="shares">0</span></p>
+    </div>
+    <div id="summary" style="display: none;">
+        <h2>Trading Summary</h2>
+        <p>Initial Balance: $<span id="initial-balance"></span></p>
+        <p>Final Balance: $<span id="final-balance"></span></p>
+        <p>Profit/Loss: $<span id="profit-loss"></span></p>
+        <p>Final Shares: <span id="final-shares"></span></p>
+        <p>Final Share Price: $<span id="final-share-price"></span></p>
+        <h3>Trade History</h3>
+        <ul id="trade-history"></ul>
+    </div>
+
+    <script>
+        const socket = io.connect('http://localhost:3000');
+
+        socket.on('stockPriceUpdate', (data) => {
+            document.getElementById('price').innerText = data.price.toFixed(2);
+            document.getElementById('balance').innerText = data.balance.toFixed(2);
+            document.getElementById('shares').innerText = data.shares;
+        });
+
+        socket.on('tradingSummary', (data) => {
+            document.getElementById('stock-info').style.display = 'none';
+            document.getElementById('summary').style.display = 'block';
+            
+            document.getElementById('initial-balance').innerText = data.initialBalance.toFixed(2);
+            document.getElementById('final-balance').innerText = data.finalBalance.toFixed(2);
+            document.getElementById('profit-loss').innerText = data.profitLoss.toFixed(2);
+            document.getElementById('final-shares').innerText = data.finalShares;
+            document.getElementById('final-share-price').innerText = data.finalSharePrice.toFixed(2);
+
+            const tradeHistory = document.getElementById('trade-history');
+            data.trades.forEach((trade, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${index + 1}. ${trade.type}: ${trade.shares} shares at $${trade.price.toFixed(2)} (${trade.type === 'BUY' ? 'Cost' : 'Revenue'}: $${trade.type === 'BUY' ? trade.cost.toFixed(2) : trade.revenue.toFixed(2)})`;
+                tradeHistory.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
